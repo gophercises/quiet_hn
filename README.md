@@ -1,4 +1,4 @@
-# Exercise #14: Quiet HN
+# Exercise #13: Quiet HN
 
 [![topic: advanced-concurrency](https://img.shields.io/badge/topic-advanced%20concurrency-green.svg?style=flat-square)](https://github.com/search?q=topic%3Aadvanced-concurrency+org%3Agophercises&type=Repositories)
 [![topic: channels](https://img.shields.io/badge/topic-channels-green.svg?style=flat-square)](https://github.com/search?q=topic%3Achannels+org%3Agophercises&type=Repositories)
