@@ -1,6 +1,6 @@
 # Exercise #13: Quiet HN
 
-[![exercise status: released](https://img.shields.io/badge/exercise%20status-released-green.svg?style=for-the-badge)](https://gophercises.com/exercises/quiet_hn) <!--[![demo: ->](https://img.shields.io/badge/demo-%E2%86%92-yellow.svg?style=for-the-badge)](https://gophercises.com/demos/cyoa/)-->
+[![exercise status: released](https://img.shields.io/badge/exercise%20status-released-green.svg?style=for-the-badge)](https://gophercises.com/exercises/quiet_hn)
 
 ## Exercise details
 
@@ -59,4 +59,5 @@ Experiment with how many goroutines you use. For instance, some of you will code
 
 *Note: You can limit your workers via channels, or with something like the [x/sync/semaphore](https://godoc.org/golang.org/x/sync/semaphore) package.*
 
-You can also look into ways to improve your cache. For instance, imagine we have a cache that we invalidate every 15 minutes, at which point we will replace all the values in it when we receive the next web request. This means that the next web request will be slow because it has to wait on us to repopulate the cache. One way to improve this experience is to always keep a valid cache, which can be done by creating the new cache BEFORE the old one expires, then rotating which cache we use. Now if we were to update and rotate the caches every 10 minutes, it is very unlikely that our currently in-use cache will ever exceed the 15 minute deadline and our users won't ever see an noticeable slowdown. 
+You can also look into ways to improve your cache. For instance, imagine we have a cache that we invalidate every 15 minutes, at which point we will replace all the values in it when we receive the next web request. This means that the next web request will be slow because it has to wait on us to repopulate the cache. One way to improve this experience is to always keep a valid cache, which can be done by creating the new cache BEFORE the old one expires, then rotating which cache we use. Now if we were to update and rotate the caches every 10 minutes, it is very unlikely that our currently in-use cache will ever exceed the 15 minute deadline and our users won't ever see an noticeable slowdown.
+
