@@ -38,7 +38,7 @@ When interacting with the HN API you might retrieve stories that need to be filt
 
 The first approach I would recommend is to always get a few extra stories to account for filtered stories. Eg if `numStories` is set to `30`, maybe we should always retrieve `1.25 * 30` stories concurrently to account for filtered stories. We obviously can't *always* count on this working, but it should work a majority of the time.
 
-After that is working, try to figure out a way to ensure you always get at least 
+After that is working, try to figure out a way to ensure you always get at least 30 stories regardless of how many might be filtered out. As I stated earlier, this can be a little trickier with concurrency and while retaining the original order of the stories so take your time and try a few approaches out. Try to weigh the pros and cons of each approach and see if you can find any edge cases where your solution would be incorrect.
 
 *Note: If you change the value of the `numStories` flag then obviously 30 will be a different value, but the same general rule still applies - always render the correct amount of stories.*
 
