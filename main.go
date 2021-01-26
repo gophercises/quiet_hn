@@ -30,8 +30,14 @@ func main() {
 		go startWorkers()
 	}
 
-	tpl := template.Must(template.ParseFiles("./index.gohtml"))
-
+	pool = sync.Pool{
+		New: func() interface{} {
+			// The Pool's New function should generally only return pointer
+			// types, since a pointer can be put into the return interface
+			// value without an allocation:
+			return template.Must(template.ParseFiles("./index.gohtml"))
+		},
+	}
 	go refreshCache(numStories)
 	http.HandleFunc("/", handler(numStories, tpl))
 	log.Println("starting server")
@@ -40,7 +46,9 @@ func main() {
 	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%d", port), nil))
 }
 
-func handler(numStories int, tpl *template.Template) http.HandlerFunc {
+var pool sync.Pool
+
+func handler(numStories int) http.HandlerFunc {
 	stories, err := getTopStories(numStories)
 	if err != nil {
 		// yeah yeah....
@@ -59,6 +67,8 @@ func handler(numStories int, tpl *template.Template) http.HandlerFunc {
 			Stories: stories,
 			Time:    time.Since(start),
 		}
+		tpl := pool.Get().(*template.Template)
+		defer pool.Put(tpl)
 		err = tpl.Execute(w, data)
 		if err != nil {
 			http.Error(w, "Failed to process the template", http.StatusInternalServerError)
